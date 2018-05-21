@@ -27,5 +27,6 @@ git-pushf() {
 
 # Aliases
 alias git-amend='git commit -a --amend --no-edit'
-alias git-afp='ga && pushf'
+alias git-afp='git-amend && git-pushf'
 alias git-pullr='git pull origin master --rebase'
+alias git-delete-merged='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
