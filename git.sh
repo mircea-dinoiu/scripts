@@ -6,9 +6,8 @@ git-local() {
 }
 
 git-newbranch() {
-  git stash save
   git fetch origin
-  git checkout -b $1
+  git checkout -B $1
   git reset --hard origin/master
 }
 
