@@ -36,6 +36,11 @@ iscmd()
   command -v "$1" >/dev/null 2>&1
 }
 
+repo()
+{
+  cd ~/repos/$1
+}
+
 # Other aliases
 alias httpserver='http-server -S -p 3000 public'
 alias addDockSep='defaults write com.apple.dock persistent-apps -array-add '"'"'{ "tile-type" = "spacer-tile"; }'"'"'; killall Dock'
