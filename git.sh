@@ -34,8 +34,8 @@ git-notpushed() {
 }
 
 # Aliases
-alias git-amend='git commit -a --amend --no-edit'
-alias git-afp='git-amend && git-pushf'
+alias git-ca='git commit -a --amend --no-edit'
+alias git-afp='git-ca && git-pushf'
 alias git-pullr='git pull origin master --rebase'
 alias git-pushall='git push --all'
 alias git-deletemerged='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
