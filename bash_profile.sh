@@ -9,6 +9,16 @@ wds() {
   npm run webpack:server
 }
 
+code () {
+    if [[ $# = 0 ]]
+    then
+        open -a "Visual Studio Code"
+    else
+        [[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
+        open -a "Visual Studio Code" --args "$F"
+    fi
+}
+
 pngtojpg() {
   sips -s format jpeg $1.png --out $1.jpg
   rm $1.png
