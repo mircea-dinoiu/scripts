@@ -4,9 +4,13 @@ source git_branch_in_prompt.sh
 
 echo "Sourcing bash profile..."
 
-wds() {
+_wds() {
   killwds
-  npm run webpack:server
+  yarn run webpack:server
+}
+
+wds() {
+  while sleep 1; do _wds; done
 }
 
 code () {
