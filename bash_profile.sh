@@ -55,6 +55,11 @@ repo()
   cd ~/repos/$1
 }
 
+sizegz() {
+  wget -S -O "__tmp_size_gz__" --header="accept-encoding: gzip" $1
+  rm "__tmp_size_gz__"
+}
+
 # Other aliases
 alias httpserver='http-server -S -p 3000 public'
 alias addDockSep='defaults write com.apple.dock persistent-apps -array-add '"'"'{ "tile-type" = "spacer-tile"; }'"'"'; killall Dock'
