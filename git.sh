@@ -1,5 +1,11 @@
 echo "Sourcing git helpers..."
 
+git config --global alias.co checkout
+git config --global alias.s status
+git config --global alias.ca "commit --amend --no-edit"
+git config --global alias.pm "pull origin master"
+git config --global alias.pmr "pull origin master --rebase"
+
 # Functions
 git-local() {
   git branch -vv | cut -c 3- | awk '$3 !~/\[/ { print $1 }'
