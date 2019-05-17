@@ -6,7 +6,7 @@ echo "Sourcing bash profile..."
 
 _wds() {
   killwds
-  yarn run webpack:server
+  yarn webpack:server
 }
 
 wds() {
@@ -71,6 +71,7 @@ if iscmd brew; then
   fi
 fi
 
+export NODE_OPTIONS=--max_old_space_size=4096
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
