@@ -1,10 +1,10 @@
 echo "Sourcing git helpers..."
 
-git config --global alias.co checkout
-git config --global alias.s status
-git config --global alias.ca "commit --amend --no-edit"
-git config --global alias.pm "pull origin master"
-git config --global alias.pmr "pull origin master --rebase"
+git config --global --replace-all alias.co checkout
+git config --global --replace-all alias.s status
+git config --global --replace-all alias.ca "commit --amend --no-edit"
+git config --global --replace-all alias.pm "pull origin master"
+git config --global --replace-all alias.pmr "pull origin master --rebase"
 
 # Functions
 git-local() {
@@ -17,7 +17,7 @@ git-newbranch() {
   git reset --hard origin/master
 }
 
-git-commit() {
+git-ce() {
   git add -A
   git commit -a -m "$1" --no-edit
 }
@@ -37,6 +37,12 @@ git-deletelocal() {
 
 git-notpushed() {
   git branch -vv | cut -c 3- | awk '$3 !~/\[/ { print $1 }'
+}
+
+git-cep() {
+  git add -A
+  git commit -a -m "$1" --no-edit
+  git-push
 }
 
 # Aliases
