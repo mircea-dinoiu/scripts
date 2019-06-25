@@ -47,7 +47,7 @@ gitdel() {
   git branch -D "$1"
 }
 
-gitcap() {
+gitcp() {
   git add -A
   git commit -a -m "$1" --no-edit
   gitp
