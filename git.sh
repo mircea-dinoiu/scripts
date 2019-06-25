@@ -7,47 +7,54 @@ git config --global --replace-all alias.pm "pull origin master"
 git config --global --replace-all alias.pmr "pull origin master --rebase"
 
 # Functions
-git-local() {
+gitlocal() {
   git branch -vv | cut -c 3- | awk '$3 !~/\[/ { print $1 }'
 }
 
-git-newbranch() {
+gitnewbranch() {
   git fetch origin
   git checkout -B $1
   git reset --hard origin/master
 }
 
-git-ce() {
+gitca() {
   git add -A
   git commit -a -m "$1" --no-edit
 }
 
-git-push() {
+gitp() {
   git push -u origin $(git branch | sed -n '/\* /s///p')
 }
 
-git-pushf() {
+gitpf() {
   git push -f -u origin $(git branch | sed -n '/\* /s///p')
 }
 
-git-deletelocal() {
+gitdeletelocal() {
   git fetch --prune
   git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' |  xargs git branch -d -f
 }
 
-git-notpushed() {
-  git branch -vv | cut -c 3- | awk '$3 !~/\[/ { print $1 }'
+gitnotpushed() {
+  git branch -vv --sort=-committerdate | cut -c 3- | awk '$3 !~/\[/ { print $1 }'
 }
 
-git-cep() {
+gitlb() {
+  git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+}
+
+gitdel() {
+  git branch -D "$1"
+}
+
+gitcap() {
   git add -A
   git commit -a -m "$1" --no-edit
-  git-push
+  gitp
 }
 
 # Aliases
-alias git-ca='git commit -a --amend --no-edit'
-alias git-afp='git-ca && git-pushf'
-alias git-pullr='git pull origin master --rebase'
-alias git-pushall='git push --all'
-alias git-deletemerged='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+alias gitcapf='gitca && gitpf'
+alias gitpullr='git pull origin master --rebase'
+alias gitpushall='git push --all'
+alias gitdeletemerged='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
