@@ -2,7 +2,7 @@ echo "Sourcing git helpers..."
 
 git config --global --replace-all alias.co checkout
 git config --global --replace-all alias.s status
-git config --global --replace-all alias.ca "commit --amend --no-edit"
+git config --global --replace-all alias.amend "commit --amend --no-edit"
 git config --global --replace-all alias.pm "pull origin master"
 git config --global --replace-all alias.pmr "pull origin master --rebase"
 
@@ -53,8 +53,12 @@ gitcp() {
   gitp
 }
 
+gitcapf() {
+  gitca $1
+  git pf
+}
+
 # Aliases
-alias gitcapf='gitca && gitpf'
 alias gitpullr='git pull origin master --rebase'
 alias gitpushall='git push --all'
 alias gitdeletemerged='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
