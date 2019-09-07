@@ -17,7 +17,7 @@ gitnewbranch() {
   git reset --hard origin/master
 }
 
-gitca() {
+gitc() {
   git add -A
   git commit -a -m "$1" --no-edit
 }
@@ -44,18 +44,22 @@ gitlb() {
 }
 
 gitdel() {
-  git branch -D "$1"
+  git branch -D "$@"
 }
 
 gitcp() {
-  git add -A
-  git commit -a -m "$1" --no-edit
+  gitc "$1"
   gitp
 }
 
-gitcapf() {
-  gitca $1
-  git pf
+gitwip() {
+  gitcp "wip"
+}
+
+gitamendp() {
+  git add -A
+  git commit -a --amend --no-edit
+  gitpf
 }
 
 # Aliases
