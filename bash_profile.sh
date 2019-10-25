@@ -13,6 +13,10 @@ wds() {
   while sleep 1; do _wds; done
 }
 
+reload() {
+  source ~/.bash_profile
+}
+
 code () {
     if [[ $# = 0 ]]
     then

@@ -5,6 +5,7 @@ git config --global --replace-all alias.s status
 git config --global --replace-all alias.amend "commit --amend --no-edit"
 git config --global --replace-all alias.pm "pull origin master"
 git config --global --replace-all alias.pmr "pull origin master --rebase"
+git config --global --replace-all alias.pick "cherry-pick"
 
 # Functions
 gitlocal() {
@@ -53,7 +54,7 @@ gitcp() {
 }
 
 gitwip() {
-  gitcp "wip"
+  gitcp "Stopping point"
 }
 
 gitamendp() {
