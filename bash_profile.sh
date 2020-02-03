@@ -32,6 +32,10 @@ pngtojpg() {
   rm $1.png
 }
 
+heictojpg() {
+  magick mogrify -monitor -format jpg *.HEIC
+}
+
 tcp() {
   lsof -i tcp:$1
 }
