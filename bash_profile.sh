@@ -14,7 +14,11 @@ wds() {
 }
 
 reload() {
-  source ~/.bash_profile
+  if [ "$(uname)" == "Darwin" ]; then
+    source ~/.bash_profile
+  else
+    source ~/.profile
+  fi
 }
 
 code () {
@@ -81,6 +85,3 @@ fi
 
 export NODE_OPTIONS=--max_old_space_size=4096
 export PATH="$HOME/.yarn/bin:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
