@@ -9,6 +9,10 @@ _wds() {
   yarn webpack:server
 }
 
+removeEmptyDirs() {
+  find . -type d -empty | xargs rmdir
+}
+
 wds() {
   while sleep 1; do _wds; done
 }
