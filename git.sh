@@ -31,9 +31,10 @@ gitpf() {
   git push -f -u origin $(git branch | sed -n '/\* /s///p')
 }
 
-gitdeletelocal() {
+git-cleanup() {
   git fetch --prune
   git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' |  xargs git branch -d -f
+  git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
 }
 
 gitnotpushed() {
@@ -66,4 +67,3 @@ gitamendp() {
 # Aliases
 alias gitpullr='git pull origin master --rebase'
 alias gitpushall='git push --all'
-alias gitdeletemerged='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
