@@ -12,10 +12,15 @@ gitlocal() {
   git branch -vv | cut -c 3- | awk '$3 !~/\[/ { print $1 }'
 }
 
-gitnewbranch() {
+gitnew() {
   git fetch origin
   git checkout -B $1
   git reset --hard origin/master
+}
+
+gitnewx() {
+  git branch -D $1
+  gitnew $1
 }
 
 gitc() {
