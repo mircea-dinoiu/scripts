@@ -19,7 +19,10 @@ wds() {
 }
 
 reload() {
-  if [ "$(uname)" == "Darwin" ]; then
+  if [ -n "$ZSH_VERSION" ]; then
+    source ~/.zprofile
+    source ~/.zshrc
+  elif [ -n "$BASH_VERSION" ]; then
     source ~/.bash_profile
   else
     source ~/.profile

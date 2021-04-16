@@ -1,16 +1,7 @@
 echo "Sourcing git branch in prompt..."
 
 if [ -n "$ZSH_VERSION" ]; then
-    # Load version control information
-    autoload -Uz vcs_info
-    precmd() { vcs_info }
-
-    # Format the vcs_info_msg_0_ variable
-    zstyle ':vcs_info:git:*' formats 'on branch %b'
-    
-    # Set up the prompt (with git branch name)
-    setopt PROMPT_SUBST
-    PROMPT='%n in ${PWD/#$HOME/~} ${vcs_info_msg_0_} > '
+    # noop
 elif [ -n "$BASH_VERSION" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
         c_reset='\[\e[0m\]'
@@ -46,5 +37,5 @@ elif [ -n "$BASH_VERSION" ]; then
     #PROMPT_COMMAND='PS1="${c_user}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\w${c_reset}$(git_prompt)\$ "'
     PROMPT_COMMAND='PS1="${c_path}\w${c_reset}$(git_prompt)\$ "'
 else
-   # assume something else
+   # noop
 fi
