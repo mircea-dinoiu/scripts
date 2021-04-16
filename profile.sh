@@ -3,7 +3,7 @@ source docker.sh
 source git.sh
 source git_branch_in_prompt.sh
 
-echo "Sourcing bash profile..."
+echo "Sourcing profile..."
 
 _wds() {
   killwds
@@ -81,10 +81,15 @@ sizegz() {
 alias httpserver='http-server -S -p 3000 public'
 alias addDockSep='defaults write com.apple.dock persistent-apps -array-add '"'"'{ "tile-type" = "spacer-tile"; }'"'"'; killall Dock'
 
-# Bash completion
-if iscmd brew; then
-  if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
+# Shell completion
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
   fi
 fi
 
