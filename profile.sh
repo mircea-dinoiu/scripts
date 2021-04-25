@@ -1,4 +1,5 @@
 #!/bin/bash
+source nvm.sh
 source docker.sh
 source git.sh
 source git_branch_in_prompt.sh
