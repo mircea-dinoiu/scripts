@@ -1,11 +1,19 @@
 if [ -n "$ZSH_VERSION" ]; then
-    # noop
-    ZSH_DISABLE_COMPFIX=true
+    source ./antigen.zsh
 
-    if type brew &>/dev/null; then
-        FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    # Load the oh-my-zsh's library.
+    antigen use oh-my-zsh
 
-        autoload -Uz compinit
-        compinit
-    fi
+    # Bundles
+    antigen bundle git
+    antigen bundle buonomo/yarn-completion
+
+    # Syntax highlighting bundle.
+    antigen bundle zsh-users/zsh-syntax-highlighting
+
+    # Load the theme.
+    antigen theme robbyrussell
+
+    # Tell Antigen that you're done.
+    antigen apply
 fi
