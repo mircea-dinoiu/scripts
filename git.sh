@@ -3,9 +3,11 @@ echo "Sourcing git helpers..."
 git config --global --replace-all alias.co checkout
 git config --global --replace-all alias.s status
 git config --global --replace-all alias.amend "commit --amend --no-edit"
-git config --global --replace-all alias.pm "pull origin master"
-git config --global --replace-all alias.pmr "pull origin master --rebase"
+git config --global --replace-all alias.sync "pull origin master"
 git config --global --replace-all alias.pick "cherry-pick"
+git config --global --replace-all alias.p "push -u origin HEAD"
+git config --global --replace-all alias.pf "push -f origin HEAD"
+git config --global --replace-all alias.lb "for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
 
 # Functions
 gitlocal() {
@@ -29,10 +31,12 @@ gitc() {
 }
 
 gitp() {
+  echo "Deprecation Warning: use <git p> instead"
   git push -u origin $(git branch | sed -n '/\* /s///p')
 }
 
 gitpf() {
+  echo "Deprecation Warning: use <git pf> instead"
   git push -f -u origin $(git branch | sed -n '/\* /s///p')
 }
 
@@ -44,10 +48,6 @@ git-cleanup() {
 
 gitnotpushed() {
   git branch -vv --sort=-committerdate | cut -c 3- | awk '$3 !~/\[/ { print $1 }'
-}
-
-gitlb() {
-  git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 }
 
 gitdel() {
@@ -68,7 +68,3 @@ gitamendp() {
   git commit -a --amend --no-edit
   gitpf
 }
-
-# Aliases
-alias gitpullr='git pull origin master --rebase'
-alias gitpushall='git push --all'
