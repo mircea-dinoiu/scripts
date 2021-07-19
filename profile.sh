@@ -76,6 +76,18 @@ repo()
   cd ~/repos/$1
 }
 
+curl_time() {
+    curl -so /dev/null -w "\
+   namelookup:  %{time_namelookup}s\n\
+      connect:  %{time_connect}s\n\
+   appconnect:  %{time_appconnect}s\n\
+  pretransfer:  %{time_pretransfer}s\n\
+     redirect:  %{time_redirect}s\n\
+starttransfer:  %{time_starttransfer}s\n\
+-------------------------\n\
+        total:  %{time_total}s\n" "$@"
+}
+
 sizegz() {
   wget -S -O "__tmp_size_gz__" --header="accept-encoding: gzip" $1
   rm "__tmp_size_gz__"
