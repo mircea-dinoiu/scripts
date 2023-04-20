@@ -109,5 +109,5 @@ if type brew &>/dev/null; then
   fi
 fi
 
-export NODE_OPTIONS=--max_old_space_size=4096
+export NODE_OPTIONS=--max_old_space_size=8192
 export PATH="$HOME/.yarn/bin:$PATH"
