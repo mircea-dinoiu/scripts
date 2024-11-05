@@ -1,9 +1,15 @@
 echo "Sourcing git helpers..."
 
+# Commit
+git config --global --replace-all alias.c "commit -a -m"
+git config --global --replace-all alias.cn "commit -a -n -m"
+git config --global --replace-all alias.cm "commit -n --no-edit"
+
 git config --global --replace-all alias.co checkout
 git config --global --replace-all alias.s status
 git config --global --replace-all alias.amend "commit --amend --no-edit"
 git config --global --replace-all alias.sync "pull origin master"
+git config --global --replace-all alias.syncr "pull origin master --rebase"
 git config --global --replace-all alias.pick "cherry-pick"
 git config --global --replace-all alias.p "push -u origin HEAD"
 git config --global --replace-all alias.pf "push -f origin HEAD"
@@ -25,21 +31,6 @@ gitnewx() {
   gitnew $1
 }
 
-gitc() {
-  git add -A
-  git commit -a -m "$1" --no-edit
-}
-
-gitp() {
-  echo "Deprecation Warning: use <git p> instead"
-  git push -u origin $(git branch | sed -n '/\* /s///p')
-}
-
-gitpf() {
-  echo "Deprecation Warning: use <git pf> instead"
-  git push -f -u origin $(git branch | sed -n '/\* /s///p')
-}
-
 git-cleanup() {
   git fetch --prune
   git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' |  xargs git branch -d -f
@@ -52,19 +43,4 @@ gitnotpushed() {
 
 gitdel() {
   git branch -D "$@"
-}
-
-gitcp() {
-  gitc "$1"
-  gitp
-}
-
-gitwip() {
-  gitcp "Stopping point"
-}
-
-gitamendp() {
-  git add -A
-  git commit -a --amend --no-edit
-  gitpf
 }
